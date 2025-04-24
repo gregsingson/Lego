@@ -39,22 +39,14 @@ erDiagram
         boolean is_spare
         %% Composite PK (inventory_id, part_num, color_id, is_spare) - Implied %%
     }
-    inventory_sets {
-        int inventory_id FK "Foreign Key to inventories"
-        string set_num FK "Foreign Key to sets"
-        int quantity
-        %% Composite PK (inventory_id, set_num) - Implied %%
-    }
 
      %% Relationships %%
     sets ||--o{ inventories : "has"
-    sets ||--o{ inventory_sets : "appears in"
     sets }o--|| themes : "belongs to"
     themes ||--o{ themes : "can contain" 
     %% Self-referencing relationship %%
 
     inventories ||--|{ inventory_parts : "contains parts"
-    inventories ||--o{ inventory_sets : "listed in"
 
     parts }o--|| inventory_parts : "appears in inventory"
     parts }o--|| part_categories : "belongs to"
